@@ -1,15 +1,42 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.util.Scanner;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+public class Main{
+    public static void main(String[] args){
+        Scanner scanner=new Scanner(System.in);
+
+        int duzgunPin=7532;//düzgün PİN kodu
+        int cehd=0, maksimumCehd=3;
+        boolean sistemeDaxilOldu=false;
+
+        System.out.println();
+        System.out.println("      ----> ATM PİN KODU SİSTEMİ <----");
+        System.out.println("        (sizin " + maksimumCehd + " cəhd haqqınız var)");
+        System.out.println();
+
+        while(cehd<maksimumCehd && !sistemeDaxilOldu){//while dövrü ilə həll
+            System.out.print("🔧PİN kodunuzu daxil edin: ");
+            int daxilEdilenPin = scanner.nextInt();
+            cehd++;
+
+            if (daxilEdilenPin==duzgunPin) {
+                System.out.println("👏🏼 sistemə daxil oldunuz!");
+                sistemeDaxilOldu = true;
+                break; // Dövrü dayandır
+            } else {
+                if (cehd < maksimumCehd) {
+                    System.out.println("❗️️ yanlış PİN -> yenidən cəhd edin");
+                    System.out.println("         (qalan cəhd sayı: " + (maksimumCehd - cehd)+")");
+                    System.out.println();
+                }
+            }
         }
+
+        //əgər 3 cəhd bitibsə və hələ də daxil olmayıbsa
+        if (!sistemeDaxilOldu) {
+            System.out.println("‼️ kartınız bloklandı!");
+            System.out.println("zəhmət olmasa bankla əlaqə saxlayın 😿");
+        }
+
+        scanner.close();
     }
 }
